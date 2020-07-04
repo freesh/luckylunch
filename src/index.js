@@ -12,11 +12,17 @@ bot.catch((err, ctx) => {
 
 bot.start((ctx) => ctx.reply('Welcome'));
 bot.hears('/luckylunch', (ctx) => {
-    let winners = '';
+    
     let members = [...Team];
-    for(let i = 1; i <= MaxWinners; i++) {
-        winners += members.splice(Math.floor(Math.random()*members.length), 1)[0].name + ' ';
+    let count = 0;
+    while(members.length > 0) {
+        let winners = '';
+        count++;
+        for(let i = 1; i <= MaxWinners; i++) {
+            winners += members.splice(Math.floor(Math.random()*members.length), 1)[0].name + ' ';
+        }
+        ctx.reply(`Team ${count}: ${winners}`);
     }
-    ctx.reply(`And the winners are: ${winners}`);
+    
 });
 bot.launch();
